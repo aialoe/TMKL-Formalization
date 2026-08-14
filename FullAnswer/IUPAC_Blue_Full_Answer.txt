@@ -1,0 +1,43 @@
+Answer: Concise refinement:
+Definition (concept): Preferred IUPAC Name (PIN) is the unambiguous, system-based name for a molecule built by selecting the principal chain, describing unsaturation, attaching substituents with correct locants, and encoding stereochemistry.
+Process (brief, with purpose and information gained at each step):
+1. Identify principal characteristic groups
+• Purpose: guide parent selection toward the best descriptive framework.
+• Information gained: which scaffold (chain or ring) and the dominant motif guiding the
+base name.
+2. Select the senior parent (longest chain/ring with maximum unsaturation and substituents)
+• Purpose: establish the core skeleton and locants for multiple bonds.
+• Information gained: candidate parent length, positions of double/triple bonds, and substituent-bearing carbons.
+3. Name the parent with unsaturation (derive base root and suffix)
+• Purpose: convert skeleton into a base name reflecting chain length and multiple bonds.
+• Information gained: proper root (e.g., hept-, oct-), and unsaturation pattern (−ane,
+−ene, −yne; mixtures as appropriate).
+4. Combine to form the preliminary parent name
+• Purpose: create a stable base name to which substituents and stereochemistry attach.
+• Information gained: coherent descriptor like hept-2-en-4-yne.
+5. Identify substituents and locants (including identical groups)
+• Purpose: determine all substituents, their positions, and multiplicities.
+• Information gained: list of substituents with locants and any di-, tri- prefixes; basis for alphabetical ordering.
+6. Add stereodescriptors (R/S, E/Z for alkenes)
+• Purpose: encode spatial arrangement to distinguish stereoisomers.
+• Information gained: configurations at stereogenic centers and bonds.
+7. Order substituents alphabetically and compile locants
+• Purpose: produce a clear, conventional substituent section.
+• Information gained: ordered substituent list with correct prefixes, parentheses where
+needed.
+8. Integrate stereodescriptors with substituents
+• Purpose: place stereochemical information correctly within the full name.
+• Information gained: finalized placement of stereochemical descriptors.
+9. Validate against priority rules and formatting
+• Purpose: ensure lowest locants, proper hyphenation, and punctuation.
+• Information gained: any adjustments to locants, order, or punctuation.
+10. Produce the final PIN
+• Purpose: deliver a complete, unambiguous name ready for use.
+• Information gained: the final, conventional PIN that uniquely identifies the molecule.
+Notes on implementation (TMK framework)
+• Each step is a modular task with inputs, outputs, and success criteria, enabling traceability.
+• Rationale is provided for key decisions (parent choice, locant direction, stereochemical label-
+ing).
+If you want, I can illustrate with a concrete example showing how each step contributes to the
+final PIN.
+
