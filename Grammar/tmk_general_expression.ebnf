@@ -1,0 +1,45 @@
+(* TMK general expression*)
+(* GeneralExpressions can be used as ActualArguments in Invocations of Mechanisms and Goals. For INTEGERs and FLOATs, addition, subtraction, multiplication, and division arithmetic operations exist with their normal meanings. Also, greater than, greater than or equal to, less than and less than or equal to relational operations exist. No operations, other than equality and inequality, exist for STRINGs *)
+
+general_expression = arithmetic_expression | relational_expression ;
+
+(* Arithmetic Expression*)
+arithmetic_expression = E ;
+E = E, arithmetic_operator, E ;
+arithmetic_operator = AddOp | SubtractOp | MultipleOp | DivideOp | RemainderOp ;
+Addop = "+" ;
+SubtractOp = "-" ;
+MultipleOp = "*" ;
+DivideOp = "/" ;
+RemainderOp = "%";
+
+E = identifier | qualified_name | literal ;
+qualified_name = name, '.', name;
+literal = string_literal | integer_literal | float_literal | boolean_literal ;
+(* see ebnf_basic.txt for character, digit *)
+string_literal = '"', { character }, '"' ;
+integer_literal = [ "-" ], digit, { digit } ;
+float_literal = [ "-" ],{ digit+ },".",{ digit+ } ;
+boolean_literal = "true" | "false" ;
+
+(* Relational Expression*)
+relational_expression = R;
+R = E, Relop, E;
+Relop = EqOp | NeqOp | GTOp | GEOp | LTOp | LEOp;
+EqOp = "==" ;
+NeqOp = "!=" ;
+GTOp = ">" ;
+GEOp = ">=" ;
+LTOp = "<" ;
+LEOp = "<=";
+
+
+(* Logical Expressions*)
+logical_expression = E, logical_op, E | logical_not, E;
+logical_op = logical_and | logical_or ;
+logical_and = "&&" ;
+logical_or = "||" ;
+logical_not = "!" ; (* other choise of not ~*) 
+
+(* Data Conditions  *)
+data_condition = logical_expression | "(", logical_expression, ")"; (* data_condition must evaluate to true or false *)

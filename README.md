@@ -1,0 +1,31 @@
+The tmk_grammar.ebnf contains rules that express the syntax, the structure of the elements of a Task-Method-Knowledge (TMK) model. 
+The tmk_general_expression.ebnf contains rules about tmk general expression following EBNF.
+
+If you are familiar with EBNF or prefer a topdown approach, feel free to start with tmk_grammar.ebnf.
+If you need a refresher with EBNF, start with tmk_general_expression.ebnf then tmk_grammer.ebnf.
+# Extended Backus Naur form (EBNF) Refences
+https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form
+
+https://en.wikipedia.org/wiki/List_of_typographical_symbols_and_punctuation_marks 
+
+https://expertbeacon.com/demystifying-backus-naur-form-bnf-and-extended-backus-naur-form-ebnf-notations/ 
+
+https://www.freecodecamp.org/news/what-are-bnf-and-ebnf/
+
+https://tomassetti.me/ebnf/
+
+
+```
+
+│   README.md
+│
+├───Grammar
+│       tmk_general_expression.ebnf
+│       tmk_grammar.ebnf
+│
+└───Models
+        IUPAC_Blue.tmk
+        VERA FP SE.tmk
+        VERA_SE.tmk
+		
+```

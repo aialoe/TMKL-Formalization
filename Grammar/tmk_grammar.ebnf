@@ -1,0 +1,195 @@
+(* TMKL2 Grammar Definion*)
+(* version 0.1*)
+
+(* Static Semantics *)
+(* All references resolve to a specific identifier *)
+(* The Given condition of each Goal should imply the Requires condition for its subordinate Mechanism *)
+(* The Provides condition for any Mechanism should imply the Makes condition for its superordinate Goal *)
+(* Each OutputParameter for an Operation should name an Instance in the Environment or a Property of an Instance *)
+(* FormalArguments correspond in Type to ActualArgument expressions *)
+
+(* Basic Elements *)
+letter = "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" 
+       | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z"
+       | "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M"
+       | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z" ;
+digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" ;
+character = letter | digit | " " | "!" | "@" | "#" | "$" | "%" | "^" | "&" | "*" 
+          | "(" | ")" | "-" | "_" | "+" | "=" | "[" | "]" | "{" | "}" | ";" | ":" 
+          | "'" | "," | "." | "/" | "?" | "|" | "\\" ;
+
+identifier = letter, { letter | digit | "_" } ;
+
+(* Whitespace - can appear between any tokens *)
+whitespace = " " | "\t" | "\n" | "\r" ;
+ws = { whitespace } ;
+
+
+(* Primitive Types and Literals *)
+primitive_type = "Integer" | "Float" | "String" | "Boolean" ;
+
+(* Literals *)
+literal = string_literal | integer_literal | float_literal | boolean_literal ;
+string_literal  = '"' , { character } , '"' ;
+integer_literal = [ "-" ] , digit , { digit } ;
+float_literal   = [ "-" ] , digit , { digit } , "." , digit , { digit } ;
+boolean_literal = "true" | "false" ;
+
+
+(* Logical Expressions *)
+logical_expression = E, logical_op, E | logical_not, E;
+logical_op = logical_and | logical_or ;
+logical_and = "&&" ;
+logical_or = "||" ;
+logical_not = "!" ;
+
+(* TMKL2 Keywords *)
+tmkl2_keywords = (Model, Goal, Mechanism, Organizer, Operation, State, Transition, Concept, Environment) ;
+
+(* Model Definition *)
+model_name = identifier ;
+model_description = string_literal | "" ;
+model_definition = Model( model_name, (goal,{goal}), (mechanism,{mechanism}), environment); 
+model = model_definition;
+
+formal_argument = {(identifier, type)} ; (* FormalArguments correspond in Type to ActualArgument expressions *)
+actual_argument = {identifier | literal} ;
+
+
+(* Goal Definition*)
+mechanism_reference = identifier ;
+goal_name = identifier ;
+goal_description = string_literal | "" ;
+category = "MAINTENANCE" | "ACCOMPLISHMENT" | "PREVENTION" | "" ; 
+input_parameters = {formal_argument} ;
+output_parameters = {formal_argument} ;
+givens = logical_expression | True ;
+makes = logical_expression | True ;
+means = {(mechanism_reference, actual_argument), {(mechanism_reference, actual_argument)}} ;
+goal_definition = Goal(goal_name, goal_description, category, 
+                            input_parameters, output_parameters,
+                            givens, makes, means) ;
+goal = goal_definition ;
+
+
+(* Mechanism Definition*)  
+mechanism_name = identifier;   
+mechanism_description = string_literal | "" ;  
+input_parameters = {formal_arguments} ;  
+output_parameters = {formal_arguments} ;  
+requires = logical_expression | True ;  
+provides = logical_expression | True ;  
+mechanism_definition = Mechanism(mechanism_name, mechanism_description, input_parameters, output_parameters, requires, provides) ; 
+
+mechanism = organizer | operation ;
+ 
+
+(* Organizer Definition *)  
+organizer_name = identifier;  
+organizer_description = string_literal | "" ;  
+input_parameters = {formal_arguments} ;  
+output_parameters = {formal_arguments} ;  
+requires = logical_expression | True ;  
+provides = logical_expression | True ;  
+states = {state_reference, {state_reference}} ;
+transitions = {transition_reference, {transition_reference}} ;
+start_state = state_reference ;
+success_state = state_reference ;
+failure_state = state_reference ;
+organizer_definition = Organizer(organizer_name, organizer_description, input_parameters, output_parameters, 
+                                          requires, provides, state, transition, 
+                                          start_state, success_state, failure_state) ;
+organizer = organizer_definition ;
+
+
+(* Operation Definition *) 
+operation_name = identifier;  
+operation_description = string_literal | "" ;  
+input_parameters = {formal_argument} ;  
+output_parameters = {formal_argument} ; 
+operation_definition = Operation(operation_name, operation_description, input_parameters, output_parameters);
+operation = operation_definition;
+
+
+(* State Definition *) 
+state_name = identifier ;
+state_description = string_literal | "" ;
+state_definition = State(state_name, state_description, goal_invocation) ;
+state = state_definition ;
+
+goal_reference = identifier ;
+goal_invocation = {(goal_reference, actual_argument)} ;
+
+
+(*Transition Definition*) 
+transition_name = identifier ;
+source_state = state_identifier ;
+target_state = state_identifier ;
+data_condition = logical_expression; (* data_condition must evaluate to true or false *)
+transition_definition = Transition(transition_name, source_state, target_state, data_condition) ;
+transition = transition_definition;
+ 
+ 
+(* Operation Definition *) 
+operation_name = external_software_computational_resource_identifier ; 
+input_parameters = {formal_arguments} ; 
+output_parameters = {formal_arguments} ; 
+operation_definition = Operation (operation_name, input_parameters, output_parameters) ;
+operation = operation_definition ;
+
+
+(* TMKL2 Additional Language Constructs *)
+
+(* Concept Definition *)
+concept_reference = identifier ;
+concept_name = identifier ;
+concept_description = string_literal | "" ;
+super_concept = {concept_reference} | ENUMERATED | {EXTERNAL} ;
+properties = {property, {property}} ;
+concept_def = Concept (concept_name, concept_description, super_concept, properties) ;
+
+(* If the SuperConcept is ENUMERATED, then the corresponding Instances form a fixed set. In this case, there is a Property with Name SYMBOL and Type STRING, whose Value in each Instance is the distinguished identifier for that Instance. *)
+
+(* If the SuperConcept is EXTERNAL, then the Concept describes data elements in the external software with which the agent interacts. In particular, there will be a Property with Name TARGET and Type STRING indicating the specific corresponding variable in the external code. There will also be two properties with Names GETTER and SETTER, both of Type Operator that provide a means to access and alter the corresponding part of the external state  *)
+
+
+(* Type Definition *)
+type_name = identifier ;
+(* A collection is a homogeneous set of elements *)
+collection = "Collection" , "(" , type_reference , ")" ;
+type_value = primitive_type | concept_reference | collection ;
+type_definition = Type (type_name, type_value) ; 
+
+
+(* Property Definition *)
+type_reference = identifier ;
+property_name = identifier ;
+property_type = type_reference;
+property_default_value = [type_value] ; 
+property_definition = Property (property_name, property_type, default_value) ;
+
+
+(* Instance Definition *)
+(* An Instance of a Concept is a Model element that satisfies that specific Concept's definition *)
+
+
+(* Relation Definition *)
+(* A Relation is a named set of Triples *)
+relation_name = identifier ;
+relation_description = string_literal | "" ;
+relation_domain = concept_reference ; 
+relation_range = type_reference ;
+
+(* Several predefined Relations exist. SuperConcept(Concept1, Concept2) indicates that Concept1 fills the Domain Property of the SuperConcept Relation, and Concept2 fills the Range Property. This Relation is automatically populated from a Model’s definition. In a similar manner, the Contains(Concept1, Type2) Relation describes a situation where an Instance of Concept1 has a Property that is a Collection whose Type is Type2. This Relation is also automatically populated from a Model’s definition.*)
+
+instance = identifier ;
+instance_reference = identifier ;
+relation_reference = identifier ;
+
+(* Triple Definition*)
+(* A Triple is one element of a Relation, <subject, relation, object> *)
+triple = <instance_reference, relation_reference, instance_reference> ; (* All references resolve to a specific identifier *)
+
+
+(* Environment Definition*)
+environment_definition = Environment ({instance}, {triple}) ;

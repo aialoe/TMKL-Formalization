@@ -1,0 +1,183 @@
+(* VERA Personal Financial Planning Self-Explanation (SE) TMK Model Schema *)
+ 
+vera_fp_se_model = Model("VERA Self-Explanation Model", goals, mechanisms, environment);
+ 
+goals = {create_project_g, create_model_g, modify_model_g, run_simulation_g };
+
+Goal(
+	create_project_g,
+	"Create a project to describe the phenomenon you are observing and contain the models to test your various hypotheses",
+	"",
+	{(user, User)},
+	{(user, User), (project, Project)},
+	user != None && project == None,
+	project != None,
+	(add_project, (user, project))
+);
+
+Goal( 
+	create_model_g, 
+	"Create a conceptual model base on an observed phenomenon.",  
+	"",
+	{(user, User), (project, Project)},
+	(* "Model" cannot be used because it is a special keyword *)
+	{(user, User), (project, Project)},
+	user != None && project != None,
+	model != None,
+	{(add_model, (user, project)), (add_component, (model))}
+); 
+
+Goal( 
+	is_user_exist_g, 
+	"Check if user is a VERA user",  
+	"",
+	{(user, User)},
+	{(user, User)},
+	user != None,
+	boolean_literal,
+	{(user_exist, user)}
+); 
+ 
+ 
+Operation(
+	user_exist_op,
+	{(user, User)}, 
+	{(user_exists, boolean_literal)} 
+);
+ 
+Operation(
+	project_exist_op,
+	{(project, Project)}, 
+	{(project_exists, Boolean)} 
+);
+
+Operation(
+	add_project_op,
+	{(project, Project)}, 
+	{(project, Project)} 
+);
+
+mechanisms =  {user_exist_op, add_project_op, add_model_op, add_component_op}; 
+
+Organizer(
+	add_project_z,
+	"Add a project",
+	{(user, User)},
+	{(user, User), (project, Project)},
+	user != None,
+	project != None,
+	{user_exists, project_not_exist, project_added}, 
+	{from_no_project_to_project_aaded},
+	user_exists_s,
+	project_added_s,
+	project_exist_s
+);
+
+State(user_exist_s,"the state of a user exists", (is_user_exist_g, user));
+
+State(project_not_exist_s, "the state of a project not exists", (project_exist_op, project));
+
+State(project_exist_s, "the state of a project exists", (project_exist_op, project));
+
+State(project_added_s, "the state of a project is added",(add_project_op, project));
+
+Transition(
+	from_no_project_to_project_aaded,
+	project_not_exist_s,
+	project_added_s, 
+	user_exist_s (* data_condition must evaluate to true or false *)
+);
+
+
+concepts =  {user, project, model, model_canvas, 
+			simulation, simulation_tab, 
+			components, relationships, parameters }; 
+
+
+ 
+
+
+Concept(name=project, description="A proejct is a way to organize your models.", super_concepts={}, properties={});
+Concept(name=model, description="A conceptual model of your observed phenomenon.", super_concepts={}, properties={});
+Concept(name=model_canvas, description="The graphical user interface where you buide your conceptual model.", super_concepts={}, properties={});
+Concept(name=simulation, description="A graph that shows you how your components change over time.", super_concepts={}, properties={});
+Concept(name=simulation_tab, description="The graphical user interface where you run simulation of your conceptual model.", super_concepts={}, properties={});
+Concept(name=component, description="An element in your model.", super_concepts={}, properties={});
+Concept(name=relationship, description="A description of how one component interact with another component in your model.", super_concepts={}, properties={});
+Concept(name=property, description="An attribute of a component.", super_concepts={}, properties={});
+Concept(name=parameter, description="A proporty which values determine the characteristics or behavior of an element in your model.", super_concepts={property}, properties={});
+
+Concept(name=simulation_parameter, description="A property which integer evalues determine duration of a simulation.", 
+		super_concepts={parameter, simulation, simulation_tab}, properties={Property ("simulation time limit", INTEGER_LITERAL, 2000) });
+
+Concept(name=component_parameter, description="A property which determine the characteristics of a component.", 
+		super_concepts={parameter, component}, properties={});
+		
+Concept(name=relationship_parameter, description="A property which determine the behavior of a component.", 
+		super_concepts={parameter, relationship}, properties={});
+
+Concept(name=Cash, description="Money in any form that is immediately available and typically earns minimal or no interest.", 
+		super_concepts={parameter, component}, 
+		properties={Property ("value", "(USD): Current cash balance. This is the starting amount in your cash account. For positive balances, the account earns interest at the rate specified. For negative balances (debt), a higher credit card interest rate (typically 18% APR) is applied.",FLOAT_LITERAL, 0), 
+					
+		Property ("rate", "(percentage per year): Annual interest rate for positive cash balances. This represents the interest earned on savings accounts, checking accounts, or money market accounts. Default is 2% annually. The interest is compounded monthly using the formula: (1 + annual_rate)^(1/12) - 1. For negative balances, the system automatically applies a credit card rate of 18% APR.", FLOAT_LITERAL, 0)	});
+		
+Concept(name=Illiquid_Assets, description="Securities or properties that you can't easily sell or exchange for cash without incurring significant losses. Examples include real estate, vehicles, collectibles, private equity, etc..", 
+		super_concepts={parameter, component}, 
+		properties={Property ("value", "(USD): Current value of the asset. This is the starting or current market value of the illiquid asset. The value changes over time based on the appreciation/depreciation rate.",FLOAT_LITERAL, 0), 
+					
+		Property ("rate", "(percentage per year): Annual appreciation/depreciation rate. Positive values represent asset appreciation (e.g., real estate increasing in value), while negative values represent depreciation (e.g., vehicles losing value). The rate is applied monthly: new_value = current_value × (1 + monthly_rate), where monthly_rate = annual_rate / 12. Default is 0 percent (no change).", FLOAT_LITERAL, 0)});
+		
+Concept(name=Marketable_Security, description="Any equity or debt instrument that can be converted into cash with ease, such as stocks, bonds, ETFs, etc..", 
+		super_concepts={parameter, component}, 
+		properties={Property ("value", "(USD): Current value of the security. This represents the total portfolio value in this security, not individual share prices.",FLOAT_LITERAL, 0), 					
+		Property ("rate", "(percentage per year):  Expected annual return rate. This is the long-term average return you expect from this investment. The return is applied monthly: new_value = current_value × (1 + monthly_rate), where monthly_rate = annual_rate / 12. Default is 7% annually.", FLOAT_LITERAL, 7),
+		Property ("variance", "(percentage):  Price volatility representing market fluctuations. This parameter controls how much the security value can randomly fluctuate each month. Variance is calculated as a percentage of the current value, making it more realistic as the portfolio grows. For example, a variance of 15% means the security can fluctuate by ±15% of its current value each month, creating realistic market volatility. The variance is applied before the growth rate. Default is 0% (no volatility).", FLOAT_LITERAL, 0)});
+
+Concept(name=Income, description="Money received on a regular basis for work and or through investments, with flexible properties for different income types.", 
+		super_concepts={parameter, component}, 
+		properties={Property ("income value", "(USD): Base monthly income amount. This is the starting monthly income that you receive. The actual income each month may vary based on the variance parameter.",FLOAT_LITERAL, 0), 					
+		Property ("rate", "(percentage per year):  Annual income growth rate. This represents salary increases, promotions, or other income growth over time. The growth is applied monthly using compound interest: monthly_rate = (1 + annual_rate)^(1/12) - 1. Default is 0% (no growth).", FLOAT_LITERAL, 0),
+		Property ("variance", "(percentage):  Monthly income fluctuation percentage. This represents the variability in your income from month to month (e.g., overtime, bonuses, commission variations). The variance creates a random fluctuation around the base income: actual_income = base_income ± (base_income × variance_percentage × random_factor). For example, a variance of 25% means your income can vary by ±25% each month. The variance is applied before the growth rate. Default is 0% (no fluctuation).", FLOAT_LITERAL, 0)});	
+
+Concept(name=Expense, description="The cost required for something, the money spent on something.", 
+		super_concepts={parameter, component}, 
+		properties={Property ("value", "(USD): Base monthly expense value. This is the starting monthly expense amount. The actual expense each month may vary based on the variance parameter.",FLOAT_LITERAL, 0), 					
+		Property ("rate", "(percentage per year):  Annual inflation rate. This represents how much the expense increases over time due to inflation. The inflation is applied monthly: new_expense = current_expense × (1 + monthly_rate), where monthly_rate = annual_rate / 12. Default is 2.5% annually.", FLOAT_LITERAL, 2.5),
+		Property ("variance", "(percentage):  Monthly expense fluctuation percentage. This represents the variability in expenses from month to month (e.g., seasonal variations, unexpected costs). The variance creates a random fluctuation around the base expense: actual_expense = base_expense ± (base_expense × variance_percentage × random_factor). For example, a variance of 10% means your expense can vary by ±10% each month. The variance is applied before the inflation rate. Default is 0% (no fluctuation).", FLOAT_LITERAL, 0)});		
+		
+Concept(name=Liability, description="A sum of money you owe. Examples include loans, credit cards, mortgages, etc..", 
+		super_concepts={parameter, component}, 
+		properties={Property ("value", "(USD): Current outstanding balance (principal). This is the remaining debt amount that needs to be paid off. The balance increases each month due to interest charges, and decreases when payments are made through Buy relationships.",FLOAT_LITERAL, 0), 					
+		Property ("rate", "(percentage per year):  Annual interest rate on the debt. This is the APR (Annual Percentage Rate) charged on the outstanding balance. Interest is compounded monthly: monthly_interest = balance × (annual_rate / 12). The interest is added to the balance each month before payments are deducted. Default varies by liability type.", FLOAT_LITERAL, 0),
+		Property ("monthly payment", "(USD):  (USD): Fixed monthly payment amount. This is the minimum or standard monthly payment you plan to make toward this liability. This value is informational; actual payments are controlled by Buy relationships from Cash to this Liability. The payment reduces both the cash balance and the liability balance. Default is $400.", FLOAT_LITERAL, 400)});	
+
+
+
+Concept(name=transaction_type, description="Transfer amount type.", 
+		super_concepts={parameter, relationship}, 
+		properties={Property ("type", STRING_LITERAL, "FIXED"||"PERCENTAGE"||"REMAINING")});
+		
+Concept(name=transaction_frequency, description="Whether this is a recurring or one-time transaction. This parameter controls how the frequency field is interpreted in the user interface.", 
+		super_concepts={parameter, relationship}, 
+		properties={Property ("ransaction_frequency:", STRING_LITERAL, "REGULAR"||"ONE_TIME")});
+		
+Concept(name=buy_value, description="((USD or %): Amount to transfer. For FIXED type, this is a dollar amount (e.g., $500). For PERCENTAGE type, this is a percentage value from 0-100 (e.g., 25 for 25% of source value). For REMAINING type, this value is ignored (all remaining balance is transferred).", 
+		super_concepts={parameter, relationship}, 
+		properties={Property ("type", FLOAT_LITERAL, 0)});
+		
+Concept(name=buy, description="The Buy relationship transfers money FROM source TO target.", super_concepts={relationship, relationship_parameter}, 
+		properties={transaction_type, transaction_frequency, buy_value});
+
+
+Concept(name=sell_value, description="((USD or %): Amount to sell. For FIXED type, this is a dollar amount worth to sell (e.g., sell $1000 worth of the asset). For PERCENTAGE type, this is a percentage value from 0-100 (e.g., 25 for 25% of asset value). For REMAINING type, this value is ignored (the entire asset is sold)).", 
+		super_concepts={parameter, relationship}, 
+		properties={Property ("type", FLOAT_LITERAL, 0)});
+		
+Concept(name=sell, description="The Sell relationship transfers money FROM assets TO cash by liquidating assets.", super_concepts={relationship, relationship_parameter}, 
+		properties={ transaction_type, transaction_frequency, sell_value});
+		
+Relation(buy, "The Buy relationship transfers money FROM source TO target. ", asset_source, asset_target);
+Relation(sell, "The Sell relationship transfers money FROM assets TO cash by liquidating assets.", asset, cash);
+
+
