@@ -23,6 +23,11 @@ https://tomassetti.me/ebnf/
 │       tmk_general_expression.ebnf
 │       tmk_grammar.ebnf
 │
+├───Knowledge Trace
+│       IUPA_ Blue_knowledge_trace.md
+│       vera_fp_knowledge_trace_what.txt
+│       vera_se_knowledge_trace_why_question.txt
+│
 └───Models
         IUPAC_Blue.tmk
         VERA FP SE.tmk

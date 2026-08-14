@@ -1,0 +1,109 @@
+====================result dictionary:================
+
+{'Episodic_Knowledge_desc': 'an mxGraphModel of the ecological model built',
+ 'Knowledge_names': 'project, model, model_canvas, simulation, simulation_tab, '
+                    'component, relationship, property, parameter, '
+                    'simulation_parameter, component_parameter, '
+                    'relationship_parameter, Cash, Illiquid_Assets, '
+                    'Marketable_Security, Income, Expense, Liability, '
+                    'transaction_type, transaction_frequency, buy_value, buy, '
+                    'sell_value, sell',
+ 'Method_names': 'user_exist_op, project_exist_op, add_project_op, '
+                 'add_project_z',
+ 'Task_names': 'create_project_g, create_model_g, is_user_exist_g',
+ 'final answer': 'multimodels',
+ 'question': 'What is the difference between expense and liability?',
+ 'software_qa_prompt': 'You are the explanation module within the software '
+                       'system called Virtual Experimental Research Assistant '
+                       '(VERA) - Financial Planning (FP) and \n'
+                       'are called "ASK-TMK". You have access to the Task, '
+                       'Method, Knowledge and episodic components of the '
+                       'Virtual Experimental Research Assistant (VERA) - '
+                       'Financial Planning (FP) known \n'
+                       'as the TMK components. Your role is to provide '
+                       "explanations to user's questions which may be related "
+                       'to tasks, methods, concepts\n'
+                       'and episodic information in Virtual Experimental '
+                       'Research Assistant (VERA) - Financial Planning (FP). A '
+                       'user is asking you questions to learn about Virtual '
+                       'Experimental Research Assistant (VERA) - Financial '
+                       'Planning (FP). \n'
+                       'For example, what does Virtual Experimental Research '
+                       'Assistant (VERA) - Financial Planning (FP) do, how '
+                       'does Virtual Experimental Research Assistant (VERA) - '
+                       'Financial Planning (FP) work, and\n'
+                       'why Virtual Experimental Research Assistant (VERA) - '
+                       'Financial Planning (FP) does certain things or what is '
+                       'wrong with their simulation running in the Virtual '
+                       'Experimental Research Assistant (VERA) - Financial '
+                       'Planning (FP)?\n'
+                       '\n'
+                       'Please use the following information about the Virtual '
+                       'Experimental Research Assistant (VERA) - Financial '
+                       'Planning (FP) when giving responses. The Virtual '
+                       'Experimental Research Assistant (VERA) - Financial '
+                       'Planning (FP) \n'
+                       'does the following high-level task: \n'
+                       '\n'
+                       'Create a project to describe the phenomenon you are '
+                       'observing and contain the models to test your various '
+                       'hypotheses. The Virtual Experimental Research '
+                       'Assistant (VERA) - Financial Planning (FP) is a web '
+                       'application that enables users to construct '
+                       'conceptual \n'
+                       'models of ecological systems, and run interactive '
+                       'simulations of these models. \n'
+                       'Virtual Experimental Research Assistant (VERA) - '
+                       'Financial Planning (FP) allows users to explore '
+                       'ecological systems and perform “what if” \n'
+                       'experiments to either explain an existing ecological '
+                       'system or attempt to \n'
+                       'predict the outcome of future changes to one. Virtual '
+                       'Experimental Research Assistant (VERA) - Financial '
+                       'Planning (FP) can only run simulations based on \n'
+                       'paramater changes done by the user. So any mistakes '
+                       'with simulation is likely based on the numerous \n'
+                       'changes to parameters made by the user. If a user asks '
+                       'you questions about why might \n'
+                       'the simulation may not be running as epxected it is '
+                       'likely \n'
+                       'due the simulation parameters set by the user \n'}
+
+Classification Model: multimodels
+
+===================Relevant TMK parts:=================
+
+[(Document(page_content="{'name': 'Liability', 'description': 'A sum of money you owe. Examples include loans, credit cards, mortgages, etc..', 'superConcept': ['parameter', 'component'], 'properties': [{'name': 'value', 'type': '(USD): Current outstanding balance (principal). This is the remaining debt amount that needs to be paid off. The balance increases each month due to interest charges, and decreases when payments are made through Buy relationships.'}, {'name': 'rate', 'type': '(percentage per year):  Annual interest rate on the debt. This is the APR (Annual Percentage Rate) charged on the outstanding balance. Interest is compounded monthly: monthly_interest = balance × (annual_rate / 12). The interest is added to the balance each month before payments are deducted. Default varies by liability type.'}, {'name': 'monthly payment', 'type': '(USD):  (USD): Fixed monthly payment amount. This is the minimum or standard monthly payment you plan to make toward this liability. This value is informational; actual payments are controlled by Buy relationships from Cash to this Liability. The payment reduces both the cash balance and the liability balance. Default is $400.'}]}", metadata={'source': 'Knowledge', 'seq_num': 17, 'entry': 'Liability'}),
+  0.7307276202271125),
+ (Document(page_content="{'name': 'Expense', 'description': 'The cost required for something, the money spent on something.', 'superConcept': ['parameter', 'component'], 'properties': [{'name': 'value', 'type': '(USD): Base monthly expense value. This is the starting monthly expense amount. The actual expense each month may vary based on the variance parameter.'}, {'name': 'rate', 'type': '(percentage per year):  Annual inflation rate. This represents how much the expense increases over time due to inflation. The inflation is applied monthly: new_expense = current_expense × (1 + monthly_rate), where monthly_rate = annual_rate / 12. Default is 2.5% annually.'}, {'name': 'variance', 'type': '(percentage):  Monthly expense fluctuation percentage. This represents the variability in expenses from month to month (e.g., seasonal variations, unexpected costs). The variance creates a random fluctuation around the base expense: actual_expense = base_expense ± (base_expense × variance_percentage × random_factor). For example, a variance of 10% means your expense can vary by ±10% each month. The variance is applied before the inflation rate. Default is 0% (no fluctuation).'}]}", metadata={'source': 'Knowledge', 'seq_num': 16, 'entry': 'Expense'}),
+  0.6840857260288347),
+ (Document(page_content="{'name': 'Cash', 'description': 'Money in any form that is immediately available and typically earns minimal or no interest.', 'superConcept': ['parameter', 'component'], 'properties': [{'name': 'value', 'type': '(USD): Current cash balance. This is the starting amount in your cash account. For positive balances, the account earns interest at the rate specified. For negative balances (debt), a higher credit card interest rate (typically 18% APR) is applied.'}, {'name': 'rate', 'type': '(percentage per year): Annual interest rate for positive cash balances. This represents the interest earned on savings accounts, checking accounts, or money market accounts. Default is 2% annually. The interest is compounded monthly using the formula: (1 + annual_rate)^(1/12) - 1. For negative balances, the system automatically applies a credit card rate of 18% APR.'}]}", metadata={'source': 'Knowledge', 'seq_num': 12, 'entry': 'Cash'}),
+  0.6285919821189048),
+ (Document(page_content="{'name': 'Income', 'description': 'Money received on a regular basis for work and or through investments, with flexible properties for different income types.', 'superConcept': ['parameter', 'component'], 'properties': [{'name': 'income value', 'type': '(USD): Base monthly income amount. This is the starting monthly income that you receive. The actual income each month may vary based on the variance parameter.'}, {'name': 'rate', 'type': '(percentage per year):  Annual income growth rate. This represents salary increases, promotions, or other income growth over time. The growth is applied monthly using compound interest: monthly_rate = (1 + annual_rate)^(1/12) - 1. Default is 0% (no growth).'}, {'name': 'variance', 'type': '(percentage):  Monthly income fluctuation percentage. This represents the variability in your income from month to month (e.g., overtime, bonuses, commission variations). The variance creates a random fluctuation around the base income: actual_income = base_income ± (base_income × variance_percentage × random_factor). For example, a variance of 25% means your income can vary by ±25% each month. The variance is applied before the growth rate. Default is 0% (no fluctuation).'}]}", metadata={'source': 'Knowledge', 'seq_num': 15, 'entry': 'Income'}),
+  0.6229242003717053)]
+====================result dictionary:================
+
+{'final answer': 'An expense is the cost you incur for goods or services, '
+                 'representing money spent or consumed during a period. '
+                 'Expenses can vary over time due to factors like inflation or '
+                 'fluctuations in usage. In contrast, a liability is a '
+                 'financial obligation or debt you owe to others, such as '
+                 'loans or credit card balances, representing amounts you '
+                 'still need to pay in the future. In short, expenses are '
+                 'costs recognized when you use resources, while liabilities '
+                 'are outstanding debts you are responsible for paying.',
+ 'intermediate_steps': ['An expense is a cost you pay for goods or services, '
+                        'while a liability is a debt or money you owe, like '
+                        'loans or credit card balances. In short, expenses are '
+                        'payments made, and liabilities are outstanding '
+                        'amounts you still need to pay.',
+                        'An expense is the cost you incur for goods or '
+                        'services, representing money spent or consumed during '
+                        'a period. Expenses can vary over time due to factors '
+                        'like inflation or fluctuations in usage. In contrast, '
+                        'a liability is a financial obligation or debt you owe '
+                        'to others, such as loans or credit card balances, '
+                        'representing amounts you still need to pay in the '
+                        'future. In short, expenses are costs recognized when '
+                        'you use resources, while liabilities are outstanding '
+                        'debts you are responsible for paying.']}

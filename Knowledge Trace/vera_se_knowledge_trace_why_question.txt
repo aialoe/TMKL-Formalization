@@ -1,0 +1,205 @@
+====================result dictionary:================
+
+{'Episodic_Knowledge_desc': 'an mxGraphModel of the ecological model built',
+ 'Knowledge_names': 'model, model_canvas, simulation, simulation_tab, '
+                    'component, relationship, property, parameter, '
+                    'simulation_parameter, component_parameter, '
+                    'relationship_parameter, assimilation_efficiency, '
+                    'move_velocity, biotic_component, consumption_rate, '
+                    'interaction_probability, abiotic_component',
+ 'Method_names': 'user_exist_method, project_exist_method, add_project_method, '
+                 'add_project',
+ 'Task_names': '',
+ 'final answer': 'multimodels',
+ 'question': 'If I am running a simulation in VERA, why do simulation outputs '
+             'change over time?',
+ 'software_qa_prompt': 'You are the explanation module within the software '
+                       'system called Virtual Ecological Research Assistant '
+                       '(VERA) and \n'
+                       'are called "ASK-TMK". You have access to the Task, '
+                       'Method, Knowledge and episodic components of the '
+                       'Virtual Ecological Research Assistant (VERA) known \n'
+                       'as the TMK components. Your role is to provide '
+                       "explanations to user's questions which may be related "
+                       'to tasks, methods, concepts\n'
+                       'and episodic information in Virtual Ecological '
+                       'Research Assistant (VERA). A user is asking you '
+                       'questions to learn about Virtual Ecological Research '
+                       'Assistant (VERA). \n'
+                       'For example, what does Virtual Ecological Research '
+                       'Assistant (VERA) do, how does Virtual Ecological '
+                       'Research Assistant (VERA) work, and\n'
+                       'why Virtual Ecological Research Assistant (VERA) does '
+                       'certain things or what is wrong with their simulation '
+                       'running in the Virtual Ecological Research Assistant '
+                       '(VERA)?\n'
+                       '\n'
+                       'Please use the following information about the Virtual '
+                       'Ecological Research Assistant (VERA) when giving '
+                       'responses. The Virtual Ecological Research Assistant '
+                       '(VERA) \n'
+                       'does the following high-level task: \n'
+                       '\n'
+                       '. The Virtual Ecological Research Assistant (VERA) is '
+                       'a web application that enables users to construct '
+                       'conceptual \n'
+                       'models of ecological systems, and run interactive '
+                       'simulations of these models. \n'
+                       'Virtual Ecological Research Assistant (VERA) allows '
+                       'users to explore ecological systems and perform “what '
+                       'if” \n'
+                       'experiments to either explain an existing ecological '
+                       'system or attempt to \n'
+                       'predict the outcome of future changes to one. Virtual '
+                       'Ecological Research Assistant (VERA) can only run '
+                       'simulations based on \n'
+                       'paramater changes done by the user. So any mistakes '
+                       'with simulation is likely based on the numerous \n'
+                       'changes to parameters made by the user. If a user asks '
+                       'you questions about why might \n'
+                       'the simulation may not be running as epxected it is '
+                       'likely \n'
+                       'due the simulation parameters set by the user \n'}
+
+Classification Model: multimodels
+
+===================Relevant TMK parts:=================
+
+[(Document(page_content="{'name': 'simulation', 'description': 'A graph that shows you how your components change over time.', 'superConcept': [], 'properties': []}", metadata={'source': 'Knowledge', 'seq_num': 2, 'entry': 'simulation'}),
+  0.6726539623527095),
+ (Document(page_content="{'name': 'simulation_tab', 'description': 'The graphical user interface where you run simulation of your conceptual model.', 'superConcept': [], 'properties': []}", metadata={'source': 'Knowledge', 'seq_num': 3, 'entry': 'simulation_tab'}),
+  0.6290835829599358),
+ (Document(page_content="{'name': 'simulation_parameter', 'description': 'A proporty which integer evalues determine duration of a simulation.', 'superConcept': ['parameter', 'simulation', 'simulation_tab'], 'properties': [{'name': 'simulation time limit', 'type': 'INTEGER_LITERAL'}]}", metadata={'source': 'Knowledge', 'seq_num': 8, 'entry': 'simulation_parameter'}),
+  0.6235765492929568),
+ (Document(page_content="{'name': 'move_velocity', 'description': 'An attribute of a living component. Average velocity of the organisms in this population as they move in their environment.', 'superConcept': ['parameter', 'component'], 'properties': [{'name': 'unit mile per second', 'type': 'FLOAT_LITERAL'}]}", metadata={'source': 'Knowledge', 'seq_num': 12, 'entry': 'move_velocity'}),
+  0.5849522500869063)]
+====================result dictionary:================
+
+{'final answer': 'Simulation outputs in VERA change over time because the '
+                 'simulation models how your ecological components evolve and '
+                 'interact dynamically as time progresses. For example, '
+                 'attributes like **move_velocity**—which represents the '
+                 'average speed at which organisms in a population move '
+                 'through their environment—can vary as the simulation runs, '
+                 'reflecting changes in behavior or environmental conditions. '
+                 'The duration of the simulation is controlled by parameters '
+                 'such as the simulation time limit, which determine how long '
+                 'the model runs and thus how long these changes can develop. '
+                 'Using the simulation tab—the graphical user interface where '
+                 'you run your conceptual model—you can observe these '
+                 'time-dependent changes, which reflect the ongoing processes '
+                 'and interactions within the system you are studying. This '
+                 'allows you to analyze how the system develops and responds '
+                 'over the course of the simulation.',
+ 'intermediate_steps': ['Simulation outputs in VERA change over time because '
+                        'the simulation shows how your ecological components '
+                        'evolve and interact as time progresses. This helps '
+                        'you see the dynamic changes in the system you are '
+                        'modeling.',
+                        'Simulation outputs in VERA change over time because '
+                        'the simulation models how your ecological components '
+                        'evolve and interact dynamically as time progresses. '
+                        'Using the simulation tab—the graphical user interface '
+                        'where you run your conceptual model—you can observe '
+                        'these time-dependent changes, which reflect the '
+                        'ongoing processes and interactions within the system '
+                        'you are studying. This allows you to analyze how the '
+                        'system develops and responds over the course of the '
+                        'simulation.',
+                        'Simulation outputs in VERA change over time because '
+                        'the simulation models how your ecological components '
+                        'evolve and interact dynamically as time progresses. '
+                        'The duration of the simulation is controlled by '
+                        'simulation parameters, such as the simulation time '
+                        'limit, which determine how long the model runs and '
+                        'thus how long these changes can develop. Using the '
+                        'simulation tab—the graphical user interface where you '
+                        'run your conceptual model—you can observe these '
+                        'time-dependent changes, which reflect the ongoing '
+                        'processes and interactions within the system you are '
+                        'studying. This allows you to analyze how the system '
+                        'develops and responds over the course of the '
+                        'simulation.',
+                        'Simulation outputs in VERA change over time because '
+                        'the simulation models how your ecological components '
+                        'evolve and interact dynamically as time progresses. '
+                        'For example, attributes like **move_velocity**—which '
+                        'represents the average speed at which organisms in a '
+                        'population move through their environment—can vary as '
+                        'the simulation runs, reflecting changes in behavior '
+                        'or environmental conditions. The duration of the '
+                        'simulation is controlled by parameters such as the '
+                        'simulation time limit, which determine how long the '
+                        'model runs and thus how long these changes can '
+                        'develop. Using the simulation tab—the graphical user '
+                        'interface where you run your conceptual model—you can '
+                        'observe these time-dependent changes, which reflect '
+                        'the ongoing processes and interactions within the '
+                        'system you are studying. This allows you to analyze '
+                        'how the system develops and responds over the course '
+                        'of the simulation.']}
+
+----
+Response Body:
+{
+  "response": "Simulation outputs in VERA change over time because the simulation models how your ecological components evolve and interact dynamically as time progresses. For example, attributes like **move_velocity**—which represents the average speed at which organisms in a population move through their environment—can vary as the simulation runs, reflecting changes in behavior or environmental conditions. The duration of the simulation is controlled by parameters such as the simulation time limit, which determine how long the model runs and thus how long these changes can develop. Using the simulation tab—the graphical user interface where you run your conceptual model—you can observe these time-dependent changes, which reflect the ongoing processes and interactions within the system you are studying. This allows you to analyze how the system develops and responds over the course of the simulation.",
+  "tmk_doc_trace": [
+    {
+      "page_content": "{'name': 'simulation', 'description': 'A graph that shows you how your components change over time.', 'superConcept': [], 'properties': []}",
+      "metadata": {
+        "source": "Knowledge",
+        "seq_num": 2,
+        "entry": "simulation"
+      }
+    },
+    {
+      "page_content": "{'name': 'simulation_tab', 'description': 'The graphical user interface where you run simulation of your conceptual model.', 'superConcept': [], 'properties': []}",
+      "metadata": {
+        "source": "Knowledge",
+        "seq_num": 3,
+        "entry": "simulation_tab"
+      }
+    },
+    {
+      "page_content": "{'name': 'simulation_parameter', 'description': 'A proporty which integer evalues determine duration of a simulation.', 'superConcept': ['parameter', 'simulation', 'simulation_tab'], 'properties': [{'name': 'simulation time limit', 'type': 'INTEGER_LITERAL'}]}",
+      "metadata": {
+        "source": "Knowledge",
+        "seq_num": 8,
+        "entry": "simulation_parameter"
+      }
+    },
+    {
+      "page_content": "{'name': 'move_velocity', 'description': 'An attribute of a living component. Average velocity of the organisms in this population as they move in their environment.', 'superConcept': ['parameter', 'component'], 'properties': [{'name': 'unit mile per second', 'type': 'FLOAT_LITERAL'}]}",
+      "metadata": {
+        "source": "Knowledge",
+        "seq_num": 12,
+        "entry": "move_velocity"
+      }
+    }
+  ],
+  "intermediate_response": [
+    "Simulation outputs in VERA change over time because the simulation shows how your ecological components evolve and interact as time progresses. This helps you see the dynamic changes in the system you are modeling.",
+    "Simulation outputs in VERA change over time because the simulation models how your ecological components evolve and interact dynamically as time progresses. Using the simulation tab—the graphical user interface where you run your conceptual model—you can observe these time-dependent changes, which reflect the ongoing processes and interactions within the system you are studying. This allows you to analyze how the system develops and responds over the course of the simulation.",
+    "Simulation outputs in VERA change over time because the simulation models how your ecological components evolve and interact dynamically as time progresses. The duration of the simulation is controlled by simulation parameters, such as the simulation time limit, which determine how long the model runs and thus how long these changes can develop. Using the simulation tab—the graphical user interface where you run your conceptual model—you can observe these time-dependent changes, which reflect the ongoing processes and interactions within the system you are studying. This allows you to analyze how the system develops and responds over the course of the simulation.",
+    "Simulation outputs in VERA change over time because the simulation models how your ecological components evolve and interact dynamically as time progresses. For example, attributes like **move_velocity**—which represents the average speed at which organisms in a population move through their environment—can vary as the simulation runs, reflecting changes in behavior or environmental conditions. The duration of the simulation is controlled by parameters such as the simulation time limit, which determine how long the model runs and thus how long these changes can develop. Using the simulation tab—the graphical user interface where you run your conceptual model—you can observe these time-dependent changes, which reflect the ongoing processes and interactions within the system you are studying. This allows you to analyze how the system develops and responds over the course of the simulation."
+  ],
+  "response_type": "VERA",
+  "metadata": [
+    "Knowledge",
+    "Knowledge",
+    "Knowledge",
+    "Knowledge"
+  ],
+  "sources": [
+    "simulation",
+    "simulation_tab",
+    "simulation_parameter",
+    "move_velocity"
+  ],
+  "scores": [
+    0.6726539623527095,
+    0.6290835829599358,
+    0.6235765492929568,
+    0.5849522500869063
+  ]
+}
