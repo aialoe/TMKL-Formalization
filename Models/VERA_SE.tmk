@@ -1,0 +1,817 @@
+(* TMK Model - exported by TMK Modeller *)
+
+(* Task Model *)
+goals = {finish_ecology_experiment, finish_simulation, create_simulation, stop_simulation, run_simulation, prepare_simulation, process_simulation_tick, report_simulation_state, get_behavior_from_collection, increment_tick_executed, simulate_behavior, simulation_agent_type_destroys_behavior, simulation_agent_destroys_behavior, simulation_agent_type_consumes_behavior, get_target_agent_nearby_from_collection, get_acting_agent_from_collection, remove_agent, simulate_agent_reproduction, create_agents , impose_maximum_number_agents_limit , calculate_number_of_new_agents_needed, change_parameters, create_project, create_model, is_user_exist};
+
+Goal(
+  name="finish_ecology_experiment",
+  description="enable the user to finish an ecology experiment by letting them build ecology models, set values for parameters, and run simulations of the model built",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="",
+  makes="",
+  means={}
+);
+
+Goal(
+  name="finish_simulation",
+  description="finish running a simulation that's created based on the model constructed and parameters values set",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="",
+  makes="",
+  means={}
+);
+
+Goal(
+  name="create_simulation",
+  description="create a simulation based on the model constructed and the parameters values set and",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="user created a project and the project has a model and simulation has not already been created",
+  makes="simulation instance created and ????",
+  means={}
+);
+
+Goal(
+  name="stop_simulation",
+  description="stop the simulation that was created based on the model constructed and parameters values set",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="simulation instance created, the user created a project and project has a model",
+  makes="simulation stopped",
+  means={}
+);
+
+Goal(
+  name="run_simulation",
+  description="start and keep running the simulation that was created based on the model constructed and parameters values set",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="simulation instance is created and number of simulation instance tick executed is less than its tick limit ",
+  makes="simulation is running",
+  means={}
+);
+
+Goal(
+  name="prepare_simulation",
+  description="prepares the simulation instance for running by setting its tick executed to 0 and all populations to their initial count",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="a project is created, simulation instance created",
+  makes="simulation's number of ticks executed becomes equal to 0",
+  means={}
+);
+
+Goal(
+  name="process_simulation_tick",
+  description="fire all of the simulation instance's tick behaviors and increment the number of ticks executed by 1",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="the simulation's number of ticks executed less than simulation instance tick limit",
+  makes="the simulation's number of ticks executed becomes equal to one more than its previous value ",
+  means={}
+);
+
+Goal(
+  name="report_simulation_state",
+  description="update the simulationinstance's collection of population instances based on number of agents for each agent type left in the simulation",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="simulation's number of ticks executed becomes less than to its tick limit",
+  makes="number of current population instance becomes equal to number of agents for population instance???? ",
+  means={}
+);
+
+Goal(
+  name="get_behavior_from_collection",
+  description="get a behavior from the collection of behaviors in the order in which behaviors were added to the colleciton",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="the number of tick behaviors a simulation instance has is greater than 1 ",
+  makes="system succesfull gets behavior from collection",
+  means={}
+);
+
+Goal(
+  name="increment_tick_executed",
+  description="increment the simulation instance's number of ticks executed by 1",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="simulation instance's number of ticks executed less than simulation instance's tick limit",
+  makes="simulation's number of ticks executed becomes equal to increment simulation instance's number of ticks executed by 1 ",
+  means={}
+);
+
+Goal(
+  name="simulate_behavior",
+  description="simulate the behavior (responsible for either an action of an agent type or for the interaction between two agent type)",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="simulation instance has tick behaviors",
+  makes="successfully simulate behavior",
+  means={}
+);
+
+Goal(
+  name="simulation_agent_type_destroys_behavior",
+  description=" simulate the destroys behavior in which the agents of the acting agent type destroys the agents of the target agent type",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="the behavior instance's label equals to destroys",
+  makes=" ",
+  means={}
+);
+
+Goal(
+  name="simulation_agent_destroys_behavior",
+  description=" simulate the consumes behavior in which the acting agent may or may not destroy a target agent nearby depending on interaction probability",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="Acting agent type is biotic",
+  makes="if acting agent type is biotic acting agent carbon biomass has changed, if acting agent type is abiotic acting agent amount has changed, if target agent type is biotic target agent carbon biomass increased and if target agent amount is abiotic target agetn amount hs increased",
+  means={}
+);
+
+Goal(
+  name="simulation_agent_type_consumes_behavior",
+  description=" simulate the consumes behavior in which the agents of the acting agent type consumes the agents of the target agent type",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="the behavior instance's label equals to consumes",
+  makes=" ",
+  means={}
+);
+
+Goal(
+  name="get_target_agent_nearby_from_collection",
+  description="get a target agent from agents that are within radius of 1 of the acting agent in random order",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="there is a target agent and behavior of acting agent type is the same as acting agent type and behavior of target agent type is the same as target agent type",
+  makes="",
+  means={}
+);
+
+
+Goal(
+  name="get_acting_agent_from_collection",
+  description="get an acting agent from the collection of acting agents in random order for a behavior",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="number of agent type agents is greater than 0",
+  makes="",
+  means={}
+);
+
+Goal(
+  name="remove_agent",
+  description="remove an agentfrom agents of the simulation instance",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="agent type is biotic and agent carbon biomass is less than 0,agent type is abiotic and agent amount is less than 0",
+  makes="agent has removed",
+  means={}
+);
+
+Goal(
+  name="simulate_agent_reproduction",
+  description="hatch new agents of the same type as the given agent. Set offpsring's age as 0, interval since reproduction as 0, and carbon biomass as 10% of parent agent's biomass divided by offspring count",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="number needed is less than offspring count",
+  makes="",
+  means={}
+);
+
+Goal(
+  name="create_agents ",
+  description="create agents of a given agent type based on the number of new agents needed. If number of new agents needed is less than 0, no new agents will be created",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="number needed and simulation instance number of current agent is less than simulation instance number of total agent limit",
+  makes="simulation instance number of current agents equals to simulation instance number of current agents plus number needed",
+  means={}
+);
+
+Goal(
+  name="impose_maximum_number_agents_limit ",
+  description=" Given the number of new agents that will be added for an agent type, check if adding the new agents will exceed the maximum number of total agents limit. Reduce the number of new agents that will be added for the agent type if so",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="number needed  is greater than 0",
+  makes=" number needed equals to minumum of those simulation instance number of total agents limit minus length of agent type agents and number needed",
+  means={}
+);
+
+Goal(
+  name="calculate_number_of_new_agents_needed",
+  description="calculate the number of new agents needed for a given agent type based on the behavior the agent is engaging in. If the behavior is produce, the number of new agents needed is the production rate. If the behavior is maintain min population, the number is the difference between min population of the agent type and the current number of agents of the agent type. If the behavior is growth, the number is the current number of agents * growth rate",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="simulation instance number of current agents less than simulation instance number of total agent limit",
+  makes=" ",
+  means={}
+);
+
+Goal(
+  name="change_parameters",
+  description="calculate the number of new agents needed for a given agent type based on the behavior the agent is engaging in. If the behavior is produce, the number of new agents needed is the production rate. If the behavior is maintain min population, the number is the difference between min population of the agent type and the current number of agents of the agent type. If the behavior is growth, the number is the current number of agents * growth rate",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="parameter length equals to vals length",
+  makes="first parameter instance value equals to first val and second parameter instance value equals to second val .... ",
+  means={}
+);
+
+
+Goal(
+  name="create_project",
+  description="Create a project to describe the phenomenon you are observing and contain the models to test your various hypotheses",
+  category="",
+  input_parameters={(user, User)},
+  output_parameters={(user, User), (project, Project)},
+  givens="user != None && project == None",
+  makes="project != None",
+  means={(add_project, (user, project))}
+);
+
+Goal(
+  name="create_model",
+  description="Create a conceptual model base on an observed phenomenon.",
+  category="",
+  input_parameters={(user, User), (project, Project)},
+  output_parameters={(user, User), (project, Project)},
+  givens="user != None && project != None",
+  makes="model != None",
+  means={(add_model, (user, project)), (add_component, (model))}
+);
+
+Goal(
+  name="is_user_exist",
+  description="Check if user is a VERA user",
+  category="",
+  input_parameters={(user, User)},
+  output_parameters={(user, User)},
+  givens="user != None",
+  makes="boolean_literal",
+  means={(user_exist, user)}
+);
+
+
+
+
+(* Method Model *)
+mechanisms = {user_exist_op, project_exist_op, add_project_op};
+
+Organizer(
+  name="add_project",
+  description="Add a project",
+  input_parameters={(user, User)},
+  output_parameters={(user, User), (project, Project)},
+  requires="user != None",
+  provides="project != None",
+  states={user_exist_s, project_not_exist_s, project_exist_s, project_added_s},
+  transitions={t0},
+  start_state="user_exists_s",
+  success_state="project_added_s",
+  failure_state="project_exist_s"
+);
+
+State(
+  name="user_exist_s",
+  description="",
+  task_invocation=(is_user_exist_g, user)
+);
+
+State(
+  name="project_not_exist_s",
+  description="",
+  task_invocation=(project_exist_op, project)
+);
+
+State(
+  name="project_exist_s",
+  description="",
+  task_invocation=(project_exist_op, project)
+);
+
+State(
+  name="project_added_s",
+  description="",
+  task_invocation=(add_project_op, project)
+);
+
+Transition(
+  source_state="project_not_exist_s",
+  target_state="project_added_s",
+  data_condition="user_exist_s"
+);
+
+Operation(
+  name="user_exist_op",
+  description="{(user, User)}",
+  input_parameters={(user_exists, boolean_literal)},
+  output_parameters={},
+  requires="",
+  provides=""
+);
+
+Operation(
+  name="project_exist_op",
+  description="{(project, Project)}",
+  input_parameters={(project_exists, Boolean)},
+  output_parameters={},
+  requires="",
+  provides=""
+);
+
+Operation(
+  name="add_project_op",
+  description="{(project, Project)}",
+  input_parameters={(project, Project)},
+  output_parameters={},
+  requires="",
+  provides=""
+);
+
+(* Method Model *)
+mechanisms = {finish_simulation, stop_simulation, create_simulation, run_simulation, process_model, prepare_simulation, process_simulation_tick, report_simulation_state, get_behavior_from_collection, increment_tick_executed, simulate_behavior, simulation_agent_type_destroys_behavior, simulation_agent_destroys_behavior, simulation_agent_type_consumes_behavior, get_target_agent_nearby_from_collection, get_behavior_from_collection, get_acting_agent_from_collection, remove_agent, create_agents, impose_maximum_number_agents_limit, calculate_number_of_new_agents_needed, change_parameters, user_exist_op, project_exist_op, add_project_op};
+
+Operation(
+  name="finish_simulation",
+  description="",
+  input_parameters={},
+  output_parameters={},
+  requires="",
+  provides=""
+);
+
+Operation(
+  name="stop_simulation",
+  description="",
+  input_parameters={},
+  output_parameters={},
+  requires="",
+  provides=""
+);
+
+Operation(
+  name="create_simulation",
+  description="",
+  input_parameters={},
+  output_parameters={},
+  requires="user created a project and the project has a model and simulation has not already been created",
+  provides="simulation instance created"
+);
+
+Operation(
+  name="run_simulation",
+  description="",
+  input_parameters={},
+  output_parameters={},
+  requires="number of simulation ticks executed becomes less than simulation tick limit",
+  provides="simulation is running"
+);
+
+Operation(
+  name="process_model",
+  description="",
+  input_parameters={},
+  output_parameters={},
+  requires="a project created by the user,project has a model",
+  provides="simulation instance created"
+);
+
+Operation(
+  name="prepare_simulation",
+  description="",
+  input_parameters={},
+  output_parameters={},
+  requires="simulation_instance_created",
+  provides="the population instane number of current count becomes equal to population instance initial count for population in simulation instance populations"
+);
+
+Operation(
+  name="process_simulation_tick",
+  description="",
+  input_parameters={},
+  output_parameters={},
+  requires="simulation instance has tick behaviors",
+  provides=""
+);
+
+Operation(
+  name="report_simulation_state",
+  description="",
+  input_parameters={},
+  output_parameters={},
+  requires="",
+  provides=""
+);
+
+Operation(
+  name="get_behavior_from_collection",
+  description="",
+  input_parameters={},
+  output_parameters={},
+  requires="",
+  provides=" "
+);
+
+Operation(
+  name="increment_tick_executed",
+  description="",
+  input_parameters={},
+  output_parameters={},
+  requires="",
+  provides="simulation's number of ticks executed becomes equal to increment simulation instance's number of ticks executed by 1"
+);
+
+Operation(
+  name="simulate_behavior",
+  description="",
+  input_parameters={},
+  output_parameters={},
+  requires="",
+  provides=" "
+);
+
+Operation(
+  name="simulation_agent_type_destroys_behavior",
+  description="",
+  input_parameters={},
+  output_parameters={},
+  requires="",
+  provides=""
+);
+
+Operation(
+  name="simulation_agent_destroys_behavior",
+  description="",
+  input_parameters={},
+  output_parameters={},
+  requires="",
+  provides=""
+);
+
+Operation(
+  name="simulation_agent_type_consumes_behavior",
+  description="",
+  input_parameters={},
+  output_parameters={},
+  requires="",
+  provides=""
+);
+
+Operation(
+  name="get_target_agent_nearby_from_collection",
+  description="",
+  input_parameters={},
+  output_parameters={},
+  requires="",
+  provides=""
+);
+
+Operation(
+  name="get_behavior_from_collection",
+  description="",
+  input_parameters={},
+  output_parameters={},
+  requires="",
+  provides=""
+);
+
+Operation(
+  name="get_acting_agent_from_collection",
+  description="",
+  input_parameters={},
+  output_parameters={},
+  requires="",
+  provides=""
+);
+
+Operation(
+  name="remove_agent",
+  description="",
+  input_parameters={},
+  output_parameters={},
+  requires="",
+  provides="agent has been removed from agents"
+);
+
+Operation(
+  name="create_agents",
+  description="",
+  input_parameters={},
+  output_parameters={},
+  requires="number of units needed",
+  provides="number of unit agents equals to number of unit agents plus number of units needed"
+);
+
+Operation(
+  name="impose_maximum_number_agents_limit",
+  description="",
+  input_parameters={},
+  output_parameters={},
+  requires="",
+  provides=""
+);
+
+Operation(
+  name="calculate_number_of_new_agents_needed",
+  description="",
+  input_parameters={},
+  output_parameters={},
+  requires="",
+  provides=""
+);
+
+Operation(
+  name="change parameters",
+  description="",
+  input_parameters={},
+  output_parameters={},
+  requires="",
+  provides=""
+);
+
+Organizer(
+  name="add_project",
+  description="Add a project",
+  input_parameters={(user, User)},
+  output_parameters={(user, User), (project, Project)},
+  requires="user != None",
+  provides="project != None",
+  states={user_exist_s, project_not_exist_s, project_exist_s, project_added_s},
+  transitions={t0},
+  start_state="user_exists_s",
+  success_state="project_added_s",
+  failure_state="project_exist_s"
+);
+
+State(
+  name="user_exist_s",
+  description="",
+  task_invocation=(is_user_exist_g, user)
+);
+
+State(
+  name="project_not_exist_s",
+  description="",
+  task_invocation=(project_exist_op, project)
+);
+
+State(
+  name="project_exist_s",
+  description="",
+  task_invocation=(project_exist_op, project)
+);
+
+State(
+  name="project_added_s",
+  description="",
+  task_invocation=(add_project_op, project)
+);
+
+Transition(
+  source_state="project_not_exist_s",
+  target_state="project_added_s",
+  data_condition="user_exist_s"
+);
+
+Operation(
+  name="user_exist_op",
+  description="{(user, User)}",
+  input_parameters={(user_exists, boolean_literal)},
+  output_parameters={},
+  requires="",
+  provides=""
+);
+
+Operation(
+  name="project_exist_op",
+  description="{(project, Project)}",
+  input_parameters={(project_exists, Boolean)},
+  output_parameters={},
+  requires="",
+  provides=""
+);
+
+Operation(
+  name="add_project_op",
+  description="{(project, Project)}",
+  input_parameters={(project, Project)},
+  output_parameters={},
+  requires="",
+  provides=""
+);
+
+(* Knowledge Model *)
+concepts = {Ecology_Model, VERA, NetLogo, EcologicalModelingSystem, Feature, InputData, Population, Ecological_System, AbioticFactor, Simulation, User, Ask_TMK, Behavior, AgentType, Agent, SimulationTick, What_If_Experiment, SimulationState, SimulationParameter};
+
+Concept(
+  name="Ecology_Model",
+  description="An ecological model in VERA is a digital representation of an ecological system built by the user. It focuses on conceptual models, allowing users to visually represent the relationships between organisms (species) and their environment (abiotic factors) using components and connections. Components can be individual species like rabbits or foxes, or non-living environmental factors like temperature or water availability. Connections define interactions or behaviors between these components, such as predation (fox eating rabbit), competition (species competing for resources), or reproduction (population growth). VERA empowers users to: a) Construct models: Drag and drop components, define connections, and set parameters to build a conceptual representation of the desired ecological system. b) Run simulations: Simulate the interactions and behaviors within the model to see how the system evolves over time. c) Explore 'what if' scenarios: Run simulations with different initial conditions or change parameters to understand how the system might respond to various influences. Overall, VERA's ecological models provide a user-friendly way to represent and experiment with ecological systems, fostering an intuitive understanding of their dynamics without complex mathematical models.",
+  super_concepts={},
+  properties={}
+);
+
+Concept(
+  name="VERA",
+  description="A Virtual Ecological Research Assistant (VERA) web application that enables users to construct and explore ecological models.",
+  super_concepts={},
+  properties={Property("capabilities", "list", ""), Property("targetUsers", "list", ""), Property("benefits", "list", ""), Property("components", "list", ""), Property("conceptual modeling", "list", ""), Property("conceptual modeling steps", "list", "")}
+);
+
+Concept(
+  name="NetLogo",
+  description="A programmable multi-agent modeling platform used to create and simulate complex systems, including ecological models.",
+  super_concepts={},
+  properties={Property("capabilities", "list", ""), Property("targetUsers", "list", ""), Property("strengths", "list", ""), Property("weaknesses", "list", ""), Property("backend", "list", "")}
+);
+
+Concept(
+  name="EcologicalModelingSystem",
+  description="A general category encompassing software applications used to construct and simulate ecological models.",
+  super_concepts={},
+  properties={Property("type", "string", ""), Property("strengths", "list", ""), Property("weaknesses", "list", ""), Property("targetUsers", "list", "")}
+);
+
+Concept(
+  name="Feature",
+  description="An aspect of the ecological modeling system that enhances its capabilities.",
+  super_concepts={},
+  properties={Property("name", "string", ""), Property("description", "string", ""), Property("version", "string", ""), Property("dependencies", "list", ""), Property("benefits", "list", "")}
+);
+
+Concept(
+  name="InputData",
+  description="Data used to define the initial state and parameters of an ecological model.",
+  super_concepts={},
+  properties={Property("dataType", "string", ""), Property("description", "string", ""), Property("source", "string", ""), Property("targetConcept", "string", "")}
+);
+
+Concept(
+  name="Population",
+  description="A group of organisms of the same species living in a particular area.",
+  super_concepts={},
+  properties={Property("abundance", "number", ""), Property("Habitat", "Habitat", ""), Property("interactsWith", "list", "")}
+);
+
+Concept(
+  name="Ecological_System",
+  description="A representation of interacting organisms and their environment in a specific area.",
+  super_concepts={},
+  properties={Property("hasComponents", "list", "")}
+);
+
+Concept(
+  name="AbioticFactor",
+  description="A non-living physical or chemical element or process within an ecological system.",
+  super_concepts={},
+  properties={Property("type", "string", ""), Property("affects", "list", "")}
+);
+
+Concept(
+  name="Simulation",
+  description="A computerized modeling of an ecological system's behavior under various conditions. The process of running an ecological model to observe how the system behaves and evolves over time based on the defined parameters and initial conditions.",
+  super_concepts={},
+  properties={Property("initialConditions", "object", ""), Property("changedFactor", "list", ""), Property("predictedOutcome", "object", ""), Property("VERA workflow", "list", ""), Property("Entities/Components", "list", ""), Property("Relationships", "list", "")}
+);
+
+Concept(
+  name="User",
+  description="A person who interacts with VERA to explore ecological systems and run simulations. This person constructs models, sets and/or changes simulations parameters and runs models.",
+  super_concepts={},
+  properties={}
+);
+
+Concept(
+  name="Ask_TMK",
+  description="The explanation module within VERA that has access to the Task-Method-Knowledge (TMK) components. It provides information about how Vera created ecological systems and simulation results based on the TMK model, the user inputs on conceptual models and simulation parameters set by user. This module just provides explanation based on TMK and user inputs. The models are constructed in Vera based on user inputs only.",
+  super_concepts={},
+  properties={}
+);
+
+Concept(
+  name="Behavior",
+  description="An action or interaction defined within an ecological model that affects populations or abiotic factors.",
+  super_concepts={},
+  properties={Property("label", "string", ""), Property("actingAgentType", "AgentType", ""), Property("targetAgentType", "AgentType", ""), Property("interactionProbability", "number", "")}
+);
+
+Concept(
+  name="AgentType",
+  description="A specific type of organism within an ecological model (e.g., Rabbit, Grass, Fox).",
+  super_concepts={},
+  properties={Property("biotic", "boolean", ""), Property("initialPopulation", "number", ""), Property("maxPopulation", "number", ""), Property("behaviors", "list", "")}
+);
+
+Concept(
+  name="Agent",
+  description="An individual organism instance within a specific agent type in the simulation.",
+  super_concepts={},
+  properties={Property("agentType", "AgentType", ""), Property("carbonBiomass", "number", ""), Property("amount", "number", "")}
+);
+
+Concept(
+  name="SimulationTick",
+  description="A single time step within a simulation run.",
+  super_concepts={},
+  properties={Property("simulationInstance", "Simulation", ""), Property("behaviorsExecuted", "list", "")}
+);
+
+Concept(
+  name="What_If_Experiment",
+  description="A 'what if' experiment in VERA enables users to predict the outcome of future changes to an ecological system by modifying parameters and observing the resulting simulation.",
+  super_concepts={},
+  properties={Property("", "", "")}
+);
+
+Concept(
+  name="SimulationState",
+  description="The current state of a running simulation, including population counts and abiotic factor values.",
+  super_concepts={},
+  properties={Property("simulationInstance", "Simulation", "")}
+);
+
+Concept(
+  name="SimulationParameter",
+  description="A variable that can be set by the user to influence the behavior of a simulation. They are also referred to as entities in a simulation. There are 3 entities in a simulation: 1) Biotic Component, 2) Abiotic Component, 3) Habitat. The corresponding parameters for the three entities are below as a list. The Parameters are settings that control the behavior of components and relationships within a VERA simulation.",
+  super_concepts={},
+  properties={Property("Biotic Population", "string", ""), Property("AbioticSubstance", "string", ""), Property("Habitat", "string", ""), Property("Simulation Parameters", "list", "")}
+);
+
+concepts =  {project, model, model_canvas, 
+			simulation, simulation_tab, 
+			components, relationships, parameters }; 
+			
+Concept(name=project, description="A proejct is a way to organize your models.", super_concepts={}, properties={});
+Concept(name=model, description="A conceptual model of your observed phenomenon.", super_concepts={}, properties={});
+Concept(name=model_canvas, description="The graphical user interface where you buide your conceptual model.", super_concepts={}, properties={});
+Concept(name=simulation, description="A graph that shows you how your components change over time.", super_concepts={}, properties={});
+Concept(name=simulation_tab, description="The graphical user interface where you run simulation of your conceptual model.", super_concepts={}, properties={});
+Concept(name=component, description="An element in your model.", super_concepts={}, properties={});
+Concept(name=relationship, description="A description of how one component interact with another component in your model.", super_concepts={}, properties={});
+Concept(name=property, description="An attribute of a component.", super_concepts={}, properties={});
+Concept(name=parameter, description="A proporty which values determine the characteristics or behavior of an element in your model.", super_concepts={property}, properties={});
+
+components =  { biotic, abiotic }; 
+relationships =  {destroy, produce, consume, become, affect };
+parameters =  {model_parameters, simulation_parameter, component_parameters, relationship_parameters };
+
+Concept(name=simulation_parameter, description="A proporty which integer evalues determine duration of a simulation.", 
+		super_concepts={parameter, simulation, simulation_tab}, properties={Property ("simulation time limit", INTEGER_LITERAL, 2000) });
+
+Concept(name=component_parameter, description="A proporty which determine the characteristics of a component.", 
+		super_concepts={parameter, component}, properties={});
+		
+Concept(name=relationship_parameter, description="A proporty which determine the behavior of a component.", 
+		super_concepts={parameter, relationship}, properties={});
+
+Concept(name=assimilation_efficiency, description="An attribute of a living component. When one thing consumes another, not all the carbon is assimilated by the consumer – some is burned off, some is passed as waste.  This parameter is the percentage of carbon biomass retained by the consumer.", 
+		super_concepts={parameter, component}, 
+		properties={Property ("unit", INTEGER_LITERAL, 1)});
+		
+Concept(name=move_velocity, description="An attribute of a living component. Average velocity of the organisms in this population as they move in their environment.", 
+		super_concepts={parameter, component}, 
+		properties={Property ("unit mile per second", FLOAT_LITERAL, 0.00001)});
+		
+Concept(name=biotic_component, description="A living element in your model.", super_concepts={component, component_parameter}, 
+		properties={assimilation_efficiency, move_velocity });
+
+Concept(name=consumption_rate, description="The number of prey consumed by the predator per simulation tick.", 
+		super_concepts={parameter, component}, 
+		properties={Property ("unit number", FLOAT_LITERAL, 0.5)});
+		
+Concept(name=interaction_probability, description="The likelihood that two related species come into sufficiently close contact that an interaction takes place.", 
+		super_concepts={parameter, component}, 
+		properties={Property ("unit percentage", FLOAT_LITERAL, 0.5)});
+
+Concept(name=abiotic_component, description="An non living component.", super_concepts={component, component_parameter}, 
+		properties={consumption_rate, interaction_probability});
+
+Relation(consumes, "predator consumes prey", predator, prey);
