@@ -1,0 +1,360 @@
+(* TMK Model - exported by TMK Modeller *)
+
+(* Task Model *)
+goals = {finish_ecology_experiment, finish_simulation, create_simulation, stop_simulation, run_simulation, prepare_simulation, process_simulation_tick, report_simulation_state, get_behavior_from_collection, increment_tick_executed, simulate_behavior, simulation_agent_type_destroys_behavior, simulation_agent_destroys_behavior, simulation_agent_type_consumes_behavior, get_target_agent_nearby_from_collection, get_acting_agent_from_collection, remove_agent, simulate_agent_reproduction, create_agents , impose_maximum_number_agents_limit , calculate_number_of_new_agents_needed, change_parameters, create_project, create_model, is_user_exist};
+
+Goal(
+  name="finish_ecology_experiment",
+  description="enable the user to finish an ecology experiment by letting them build ecology models, set values for parameters, and run simulations of the model built",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="",
+  makes="",
+  means={}
+);
+
+Goal(
+  name="finish_simulation",
+  description="finish running a simulation that's created based on the model constructed and parameters values set",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="",
+  makes="",
+  means={}
+);
+
+Goal(
+  name="create_simulation",
+  description="create a simulation based on the model constructed and the parameters values set and",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="user created a project and the project has a model and simulation has not already been created",
+  makes="simulation instance created and ????",
+  means={}
+);
+
+Goal(
+  name="stop_simulation",
+  description="stop the simulation that was created based on the model constructed and parameters values set",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="simulation instance created, the user created a project and project has a model",
+  makes="simulation stopped",
+  means={}
+);
+
+Goal(
+  name="run_simulation",
+  description="start and keep running the simulation that was created based on the model constructed and parameters values set",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="simulation instance is created and number of simulation instance tick executed is less than its tick limit ",
+  makes="simulation is running",
+  means={}
+);
+
+Goal(
+  name="prepare_simulation",
+  description="prepares the simulation instance for running by setting its tick executed to 0 and all populations to their initial count",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="a project is created, simulation instance created",
+  makes="simulation's number of ticks executed becomes equal to 0",
+  means={}
+);
+
+Goal(
+  name="process_simulation_tick",
+  description="fire all of the simulation instance's tick behaviors and increment the number of ticks executed by 1",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="the simulation's number of ticks executed less than simulation instance tick limit",
+  makes="the simulation's number of ticks executed becomes equal to one more than its previous value ",
+  means={}
+);
+
+Goal(
+  name="report_simulation_state",
+  description="update the simulationinstance's collection of population instances based on number of agents for each agent type left in the simulation",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="simulation's number of ticks executed becomes less than to its tick limit",
+  makes="number of current population instance becomes equal to number of agents for population instance???? ",
+  means={}
+);
+
+Goal(
+  name="get_behavior_from_collection",
+  description="get a behavior from the collection of behaviors in the order in which behaviors were added to the colleciton",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="the number of tick behaviors a simulation instance has is greater than 1 ",
+  makes="system succesfull gets behavior from collection",
+  means={}
+);
+
+Goal(
+  name="increment_tick_executed",
+  description="increment the simulation instance's number of ticks executed by 1",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="simulation instance's number of ticks executed less than simulation instance's tick limit",
+  makes="simulation's number of ticks executed becomes equal to increment simulation instance's number of ticks executed by 1 ",
+  means={}
+);
+
+Goal(
+  name="simulate_behavior",
+  description="simulate the behavior (responsible for either an action of an agent type or for the interaction between two agent type)",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="simulation instance has tick behaviors",
+  makes="successfully simulate behavior",
+  means={}
+);
+
+Goal(
+  name="simulation_agent_type_destroys_behavior",
+  description=" simulate the destroys behavior in which the agents of the acting agent type destroys the agents of the target agent type",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="the behavior instance's label equals to destroys",
+  makes=" ",
+  means={}
+);
+
+Goal(
+  name="simulation_agent_destroys_behavior",
+  description=" simulate the consumes behavior in which the acting agent may or may not destroy a target agent nearby depending on interaction probability",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="Acting agent type is biotic",
+  makes="if acting agent type is biotic acting agent carbon biomass has changed, if acting agent type is abiotic acting agent amount has changed, if target agent type is biotic target agent carbon biomass increased and if target agent amount is abiotic target agetn amount hs increased",
+  means={}
+);
+
+Goal(
+  name="simulation_agent_type_consumes_behavior",
+  description=" simulate the consumes behavior in which the agents of the acting agent type consumes the agents of the target agent type",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="the behavior instance's label equals to consumes",
+  makes=" ",
+  means={}
+);
+
+Goal(
+  name="get_target_agent_nearby_from_collection",
+  description="get a target agent from agents that are within radius of 1 of the acting agent in random order",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="there is a target agent and behavior of acting agent type is the same as acting agent type and behavior of target agent type is the same as target agent type",
+  makes="",
+  means={}
+);
+
+
+Goal(
+  name="get_acting_agent_from_collection",
+  description="get an acting agent from the collection of acting agents in random order for a behavior",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="number of agent type agents is greater than 0",
+  makes="",
+  means={}
+);
+
+Goal(
+  name="remove_agent",
+  description="remove an agentfrom agents of the simulation instance",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="agent type is biotic and agent carbon biomass is less than 0,agent type is abiotic and agent amount is less than 0",
+  makes="agent has removed",
+  means={}
+);
+
+Goal(
+  name="simulate_agent_reproduction",
+  description="hatch new agents of the same type as the given agent. Set offpsring's age as 0, interval since reproduction as 0, and carbon biomass as 10% of parent agent's biomass divided by offspring count",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="number needed is less than offspring count",
+  makes="",
+  means={}
+);
+
+Goal(
+  name="create_agents ",
+  description="create agents of a given agent type based on the number of new agents needed. If number of new agents needed is less than 0, no new agents will be created",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="number needed and simulation instance number of current agent is less than simulation instance number of total agent limit",
+  makes="simulation instance number of current agents equals to simulation instance number of current agents plus number needed",
+  means={}
+);
+
+Goal(
+  name="impose_maximum_number_agents_limit ",
+  description=" Given the number of new agents that will be added for an agent type, check if adding the new agents will exceed the maximum number of total agents limit. Reduce the number of new agents that will be added for the agent type if so",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="number needed  is greater than 0",
+  makes=" number needed equals to minumum of those simulation instance number of total agents limit minus length of agent type agents and number needed",
+  means={}
+);
+
+Goal(
+  name="calculate_number_of_new_agents_needed",
+  description="calculate the number of new agents needed for a given agent type based on the behavior the agent is engaging in. If the behavior is produce, the number of new agents needed is the production rate. If the behavior is maintain min population, the number is the difference between min population of the agent type and the current number of agents of the agent type. If the behavior is growth, the number is the current number of agents * growth rate",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="simulation instance number of current agents less than simulation instance number of total agent limit",
+  makes=" ",
+  means={}
+);
+
+Goal(
+  name="change_parameters",
+  description="calculate the number of new agents needed for a given agent type based on the behavior the agent is engaging in. If the behavior is produce, the number of new agents needed is the production rate. If the behavior is maintain min population, the number is the difference between min population of the agent type and the current number of agents of the agent type. If the behavior is growth, the number is the current number of agents * growth rate",
+  category="",
+  input_parameters={},
+  output_parameters={},
+  givens="parameter length equals to vals length",
+  makes="first parameter instance value equals to first val and second parameter instance value equals to second val .... ",
+  means={}
+);
+
+
+Goal(
+  name="create_project",
+  description="Create a project to describe the phenomenon you are observing and contain the models to test your various hypotheses",
+  category="",
+  input_parameters={(user, User)},
+  output_parameters={(user, User), (project, Project)},
+  givens="user != None && project == None",
+  makes="project != None",
+  means={(add_project, (user, project))}
+);
+
+Goal(
+  name="create_model",
+  description="Create a conceptual model base on an observed phenomenon.",
+  category="",
+  input_parameters={(user, User), (project, Project)},
+  output_parameters={(user, User), (project, Project)},
+  givens="user != None && project != None",
+  makes="model != None",
+  means={(add_model, (user, project)), (add_component, (model))}
+);
+
+Goal(
+  name="is_user_exist",
+  description="Check if user is a VERA user",
+  category="",
+  input_parameters={(user, User)},
+  output_parameters={(user, User)},
+  givens="user != None",
+  makes="boolean_literal",
+  means={(user_exist, user)}
+);
+
+
+
+
+(* Method Model *)
+mechanisms = {user_exist_op, project_exist_op, add_project_op};
+
+Organizer(
+  name="add_project",
+  description="Add a project",
+  input_parameters={(user, User)},
+  output_parameters={(user, User), (project, Project)},
+  requires="user != None",
+  provides="project != None",
+  states={user_exist_s, project_not_exist_s, project_exist_s, project_added_s},
+  transitions={t0},
+  start_state="user_exists_s",
+  success_state="project_added_s",
+  failure_state="project_exist_s"
+);
+
+State(
+  name="user_exist_s",
+  description="",
+  task_invocation=(is_user_exist_g, user)
+);
+
+State(
+  name="project_not_exist_s",
+  description="",
+  task_invocation=(project_exist_op, project)
+);
+
+State(
+  name="project_exist_s",
+  description="",
+  task_invocation=(project_exist_op, project)
+);
+
+State(
+  name="project_added_s",
+  description="",
+  task_invocation=(add_project_op, project)
+);
+
+Transition(
+  source_state="project_not_exist_s",
+  target_state="project_added_s",
+  data_condition="user_exist_s"
+);
+
+Operation(
+  name="user_exist_op",
+  description="{(user, User)}",
+  input_parameters={(user_exists, boolean_literal)},
+  output_parameters={},
+  requires="",
+  provides=""
+);
+
+Operation(
+  name="project_exist_op",
+  description="{(project, Project)}",
+  input_parameters={(project_exists, Boolean)},
+  output_parameters={},
+  requires="",
+  provides=""
+);
+
+Operation(
+  name="add_project_op",
+  description="{(project, Project)}",
+  input_parameters={(project, Project)},
+  output_parameters={},
+  requires="",
+  provides=""
+);
+
+

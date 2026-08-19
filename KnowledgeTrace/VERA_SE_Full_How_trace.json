@@ -1,0 +1,9 @@
+{
+  "response": "VERA adds a model by creating a conceptual representation based on an observed phenomenon within a user's project. It first ensures that both the user and the project exist, then adds the model to that project. After adding the model, VERA builds its structure by adding components to it. This process allows the user to develop a clear and organized model of the system they are studying.",
+  "tmk_doc_trace": [],
+  "intermediate_response": [],
+  "response_type": "mmodel",
+  "metadata": [],
+  "sources": [],
+  "scores": []
+}
