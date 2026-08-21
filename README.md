@@ -19,21 +19,16 @@ https://tomassetti.me/ebnf/
 
 │   README.md
 │
-├───FullAnswer
-│       IUPAC_Blue_Full_Answer.txt
-│
 ├───Grammar
 │       tmk_general_expression.ebnf
 │       tmk_grammar.ebnf
 │
 ├───KnowledgeTrace
-│       IUPA_ Blue_knowledge_trace.md
-│       vera_fp_knowledge_trace_what.txt
-│       vera_se_knowledge_trace_why_question.txt
+│       VERA_SE_Full_How_trace.json
+│       VERA_SE_Full_What_trace.json
+│       VERA_SE_Full_Why_trace.json
 │
-└───Models
-        IUPAC_Blue.tmk
-        VERA FP SE.tmk
+└───Model
         VERA_SE.tmk
 		
 ```
