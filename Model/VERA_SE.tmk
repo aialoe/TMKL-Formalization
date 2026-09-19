@@ -27,13 +27,13 @@ Goal(
 
 Goal(
   name="create_simulation",
-  description="create a simulation based on the model constructed and the parameters values set and",
-  category="",
-  input_parameters={},
-  output_parameters={},
-  givens="user created a project and the project has a model and simulation has not already been created",
-  makes="simulation instance created and ????",
-  means={}
+  description="create a simulation based on the model constructed and the parameters values set and prepare the simulation for running",
+  category="Accomplishment",
+  input_parameters={(user, User), (project, Project)},
+  output_parameters={(simulation, Simulation)},
+  givens="user != None && project != None && model != None && simulation is None",
+  makes="simulation != None",
+  means={(process_model, (user, project, model)), (prepare_simulation, (simulation))}
 );
 
 Goal(
@@ -284,10 +284,10 @@ Goal(
 
 
 (* Method Model *)
-mechanisms = {user_exist_op, project_exist_op, add_project_op};
+mechanisms = {add_project_org, user_exist_op, project_exist_op, add_project_op};
 
 Organizer(
-  name="add_project",
+  name="add_project_org",
   description="Add a project",
   input_parameters={(user, User)},
   output_parameters={(user, User), (project, Project)},
@@ -352,6 +352,79 @@ Operation(
   name="add_project_op",
   description="{(project, Project)}",
   input_parameters={(project, Project)},
+  output_parameters={},
+  requires="",
+  provides=""
+);
+(* Method Model *)
+mechanisms = {process_model_org, prepare_simulation_org};
+Organizer(
+  name="process_model_org",
+  description="Process the model by setting the simulation instance's tick limit to be the input tick limit, process the parameters, ecology nodes and ecology edges of the model by converting them into populations, agent types, simulation parameters, simulation initialization behaviors, tick behaviors, and growth pocedures",
+  input_parameters={(user, User),(project, Project)},
+  output_parameters={(simulation, Simulation) },
+  requires="simulation is None",
+  provides="simulation != None",
+  states={simualtion_is_none_s, simulation_is_not_none_s},
+  transitions={create_simuluation_t}  
+);
+
+State(
+  name="simualtion_is_none_s",
+  description="",
+  task_invocation=(simualtion_is_none_op, simulation)  
+);
+
+State(
+  name="simualtion_is_not_none_s",
+  description="",
+  task_invocation=(simualtion_is_none_op, simulation)
+);
+
+Transition(
+  name = "create_simuluation_t",
+  source_state="simualtion_is_none_s",
+  target_state="simualtion_is_not_none_s",
+  data_condition="user_exist_s && project_exist_s && model_exist_s"
+);
+
+Operation(
+  name="simualtion_is_none_op",
+  description="has a simulation been created for the specific user, project, model",
+  input_parameters={(simualtion_is_none, boolean_literal)},
+  output_parameters={},
+  requires="",
+  provides=""
+);
+
+Organizer(
+  name="prepare_simulation_org",
+  description="Prepares the simulation instance for running by setting its tick executed to 0 and all populations to their initial count",
+  input_parameters={(user, User),(project, Project), (simulation, Simulation)},
+  output_parameters={(user, User),(project, Project), (simulation, Simulation) },
+  requires="simulation != None",
+  provides="simulation.tick.ex==0 && simulation.properties set to defaul values",
+  states={simulation_is_not_none_s, simulation_properties_initialized_s},
+  transitions={prepare_simuluation_t}  
+);
+
+State(
+  name="simulation_properties_initialized_s",
+  description="",
+  task_invocation=(simulation_properties_initialized_op, simulation)
+);
+
+Transition(
+  name = "prepare_simuluation_t",
+  source_state="simualtion_is_not_none_s",
+  target_state="simulation_properties_initialized_s",
+  data_condition="simulation_exist_s && simulation_properties_is_not_initialized_s"
+);
+
+Operation(
+  name="simulation_properties_initialized_op",
+  description="Initialize simulation properties with default values",
+  input_parameters={(simualtion, String)},
   output_parameters={},
   requires="",
   provides=""
